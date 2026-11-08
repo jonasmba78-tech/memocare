@@ -1,0 +1,3 @@
+/* === VUE · quiz (jeux) === */
+V.jeux=()=>{qs={i:0,s:0};qshow()};
+function qshow(){const L=QZ[mod];if(qs.i>=L.length){$('#v').innerHTML=`<div class='gout'>Score : ${qs.s} / ${L.length} ${qs.s==L.length?'🏆':'💪🏾'}</div><h4>Les réponses</h4>`+L.map((x,i)=>`<div class='rl'><b>${i+1}. ${x.q}</b><p>✅ ${x.o[x.a]}</p><p class='mu'>${x.w}</p></div>`).join('')+`<button class='go' id='qr'>Rejouer ↺</button>`;mk(mod+':jeux');return}const x=L[qs.i];$('#v').innerHTML=`<p class='mu'>${x.t} · ${qs.i+1}/${L.length}</p><div class='gout' style='font-size:19px'>${x.q}</div>`+x.o.map((o,i)=>`<button class='node' data-qa='${i}' style='margin-bottom:8px'><span><b>${o}</b></span></button>`).join('')+`<div id='qf'></div>`}

@@ -1,0 +1,9 @@
+/* === ÉTAT GLOBAL (mod, sec…) + fabrique de cartes + premières vues V (bd, jour, eq, mots, corps) === */
+let mod=1,sec='bd',tm,cur=3;
+const cards=(t,s,x)=>`<h4>${t}</h4><div class="g">${s.map(l=>{const[a,b,c,d]=l.split('|');return `<div class="fc" data-t="${(x&&d?d:b).replace(/ \/ /g,', ')}"><div class="in"><div class="f"><b>${a}</b><span>${b}</span></div><div class="b">${c}<small>${d||''}</small></div></div></div>`}).join('')}</div>`;
+const V={
+bd(){$('#v').innerHTML=CB[mod].map((c,i)=>`<div class="cm" data-i="${i}"><h3>${c.t}</h3><div class="strip"></div><button class="go nx">Commencer ▸</button></div>`).join('')},
+jour(){$('#v').innerHTML='<div class="sky" id="sky"><span id="sun"></span><div id="sl"></div></div><p class="mu">Touche le ciel pour écouter la salutation.</p>';const f=()=>{const a=$('#sky');if(!a){clearInterval(tm);return}const s=ST[cur=(cur+1)%4];seen.add(cur);if(seen.size>3)mk('1:jour');a.style.background=s[3];const u=$('#sun');u.textContent=s[0];u.style.left=s[4]+'%';u.style.top=s[5]+'px';$('#sl').innerHTML=`<b>${s[1]}</b><br><small>${s[2]}</small>`};f();tm=setInterval(f,3000);$('#sky').onclick=()=>sp(ST[cur][1])},
+eq(){$('#v').innerHTML=cards('L’équipe professionnelle',TEAM)+cards('Politesse',POL)+'<p class="mu">Touche une carte : image, mot anglais, puis français.</p>'},
+mots(){if(CD[mod]){$('#v').innerHTML=CD[mod].map(([t,l,x])=>cards(t,l,x)).join('');return}$('#v').innerHTML=mod==3?cards('Vocabulaire général',L3,1)+cards('Auxiliaire de vie',J1)+cards('Auxiliaire de puériculture',J2)+cards('Éducateur spécialisé',J3):cards('Verbes d’action',VERB)+cards('Équipements',EQ)},
+corps(){$('#v').innerHTML='<div id="c3"></div><div id="lb">Touche une partie du corps. Glisse pour tourner.</div>';body3d()}};

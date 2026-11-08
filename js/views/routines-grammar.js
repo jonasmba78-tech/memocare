@@ -1,0 +1,27 @@
+/* === VUES · plan (v1), routines (horloge), grammaire + clics associés === */
+V.plan=()=>{const st=Object.keys(MO[mod].S).filter(k=>k!='plan');$('#v').innerHTML='<div class="path">'+st.map((k,i)=>`<button class="node ${P[mod+':'+k]?'ok':''}" data-s="${k}"><i>${P[mod+':'+k]?'✓':i+1}</i><span><b>${MO[mod].S[k]}</b><small>${HINT[k]}</small></span></button>`).join('')+'</div>'};
+const RT={A:["🧓🏾","Mr. Atanguna",["7:00|⏰|Mr. Atanguna wakes up at 7 a.m.","7:30|🍳|He has breakfast at 7.30 a.m.","8:30|🚿|I help him with his shower and dressing at 8.30 a.m.","10:00|🌳|He goes for a walk in the garden at 10 a.m.","12:00|🍲|He has lunch at 12 p.m.","14:00|😴|He takes a nap at 2 p.m.","16:00|📖|We read together at 4 p.m.","18:00|🍽️|He has dinner at 6 p.m.","20:00|🌙|He goes to bed at 8 p.m."]],
+B:["👶🏾","Bébé de 6 mois",["6:30|⏰|The baby wakes up at 6.30 a.m.","7:00|🍼|He has his bottle at 7 a.m.","8:00|🧷|I change his nappy and dress him at 8 a.m.","9:00|🛒|We go for a walk at 9 a.m.","10:30|😴|He has a nap at 10.30 a.m.","12:00|🍼|He has another bottle at 12 p.m.","13:00|🧸|He plays on his mat at 1 p.m.","15:00|😴|He has a nap at 3 p.m.","17:00|🛁|I give him a bath at 5 p.m.","18:00|🍼|He has his last bottle at 6 p.m.","19:00|🌙|He goes to bed at 7 p.m."]],
+C:["🧒🏾","Enfant au centre",["8:00|🏫|The child arrives at the centre at 8 a.m.","8:30|✨|We do sensory activities at 8.30 a.m.","9:30|🗣️|We do communication exercises at 9.30 a.m.","10:30|🍪|He has a snack at 10.30 a.m.","11:00|🤸🏾|We do psychomotor exercises at 11 a.m.","12:00|🍲|He has lunch at 12 p.m. I help him eat.","13:30|😴|He rests at 1.30 p.m.","15:00|🎨|We do art activities at 3 p.m.","16:00|🚌|We prepare for his return at 4 p.m."]]};
+V.rout=()=>{clearInterval(rp);rp=null;ri=0;$('#v').innerHTML=`<div class="tabs">${Object.keys(RT).map(k=>`<button data-r="${k}" class="${k==rk?'on':''}">${RT[k][0]} ${RT[k][1]}</button>`).join('')}</div><div class="rt" id="rt"><svg viewBox="0 0 100 100" class="ck"><circle cx="50" cy="50" r="46"/><line id="hh" x1="50" y1="50" x2="50" y2="28"/><line id="mm" x1="50" y1="50" x2="50" y2="14"/></svg><div class="re" id="re"></div><div class="rs" id="rs"></div><div class="rd" id="rd"></div></div><button class="go" id="rp">▶ Lecture</button>`;rshow()};
+function rshow(){const a=RT[rk][2],s=a[ri].split('|'),[h,m]=s[0].split(':').map(Number);
+$('#hh').style.transform=`rotate(${(h%12+m/60)*30}deg)`;$('#mm').style.transform=`rotate(${m*6}deg)`;$('#rt').dataset.n=(h<6||h>=19)?1:0;
+$('#re').innerHTML=`<span>${s[1]}</span>`;$('#rs').innerHTML=`<small>${s[0]}</small><br>${s[2]}<button class="sp" data-t="${s[2]}">🔊</button>`;
+$('#rd').innerHTML=a.map((_,i)=>`<button data-ri="${i}" aria-label="${i+1}" class="${i==ri?'on':i<ri?'p':''}"></button>`).join('');
+if(ri==a.length-1){P['r'+rk]=1;sv();if(P.rA&&P.rB&&P.rC)mk('3:rout')}}
+function rplay(){if(rp){clearInterval(rp);rp=null;$('#rp').textContent='▶ Lecture';return}$('#rp').textContent='❚❚ Pause';if(ri>=RT[rk][2].length-1){ri=0;rshow()}rp=setInterval(()=>{if(ri<RT[rk][2].length-1){ri++;rshow();sp(RT[rk][2][ri].split('|')[2])}else rplay()},3200)}
+const GS=["I","You","He","She","We","They"],GV=[["help","helps","the patient"],["wake up","wakes up",""],["wash","washes","the patient’s face"],["study","studies","English"],["feed","feeds","the baby"],["play","plays","with the children"]],GF=["Affirmative","Négative","Question"];
+const ch=(k,a,c)=>`<div class="tabs">${a.map((l,i)=>`<button data-g="${k}:${i}" class="${i==c?'on':''}">${l}</button>`).join('')}</div>`;
+V.gram=()=>{const S=GS[g.s],[b,t,c]=GV[g.v],th=g.s==2||g.s==3;let h;
+if(g.f==0)h=`${S} <mark>${th?t:b}</mark> ${c}.`;else if(g.f==1)h=`${S} <mark>${th?'does':'do'}</mark> not ${b} ${c}.`;else h=`<mark>${th?'Does':'Do'}</mark> ${S=='I'?'I':S.toLowerCase()} ${b} ${c}?`;
+const pl=h.replace(/<[^>]+>/g,'');
+$('#v').innerHTML=`<h4>Sujet</h4>${ch('s',GS,g.s)}<h4>Verbe</h4>${ch('v',GV.map(x=>x[0]),g.v)}<h4>Forme</h4>${ch('f',GF,g.f)}<div class="gout">${h}<button class="sp" data-t="${pl}">🔊</button></div><p class="mu">${g.f==0?(th?`He / She / It : ${b} → ${t}`:'Sujet I / you / we / they : le verbe ne change pas.'):g.f==1?'Négation : do / does + not + verbe de base.':'Question : Do / Does + sujet + verbe de base.'}</p><div class="rl"><p><b>-s</b> : I wake up → She wakes up</p><p><b>-es</b> (-sh, -ch, -o, -ss, -x) : I wash → She washes</p><p><b>y → -ies</b> : I study → He studies</p></div><h4>Exemples clés</h4>${["I help the patient get up at 8 a.m.","She feeds the baby every three hours","He works in a special school.","The children play in the garden.","We don’t work on Sundays","Does the baby eat pureed food?"].map(x=>`<p>${x}<button class="sp" data-t="${x}">🔊</button></p>`).join('')}`};
+document.addEventListener('click',e=>{const t=e.target;let x;
+if(x=t.closest('[data-r]')){rk=x.dataset.r;V.rout()}
+else if(x=t.closest('[data-ri]')){ri=+x.dataset.ri;rshow()}
+else if(t.closest('#rp')){rplay()}
+else if(x=t.closest('[data-g]')){const[a,b]=x.dataset.g.split(':');g[a]=+b;GC.add(JSON.stringify(g));V.gram();if(GC.size>=4)mk('3:gram')}
+const f=t.closest('.fc'),n=t.closest('.nx'),o=t.closest('#go');
+if(f){f.classList.add('seen');if(!document.querySelector('.fc:not(.seen)'))mk(mod+':'+sec)}
+if(n){const c=n.closest('.cm');if(+c.dataset.k>=CB[mod][+c.dataset.i].p.length){P['c'+mod+c.dataset.i]=1;sv();if(CB[mod].every((_,i)=>P['c'+mod+i]))mk(mod+':bd')}}
+if(o&&o.dataset.k){const[m,k]=o.dataset.k.split(':');mod=+m;sec=k;R();scrollTo({top:0,behavior:'smooth'})}});
