@@ -1,0 +1,40 @@
+/* CORRECTIFS iPhone / iPad (Safari, Chrome et Firefox iOS = WebKit)
+   ⚠ Tout est enfermé dans @supports (-webkit-touch-callout:none), propriété qui n'existe QUE sur iOS :
+   Android, Windows, Mac et les autres navigateurs ignorent ce bloc → aucun changement pour eux. */
+@supports (-webkit-touch-callout:none){
+  /* 1. Pas d'agrandissement automatique du texte quand on tourne l'iPhone */
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+  /* 2. Encoche / Dynamic Island : marges de sécurité à gauche et à droite (mode paysage) */
+  main{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+
+  /* 3. Boutons et champs : supprime l'apparence native iOS (texte bleu, ombre interne, coins arrondis imposés) */
+  button{color:inherit;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent}
+  input,textarea{-webkit-appearance:none;appearance:none;border-radius:10px}
+
+  /* 4. Champs à 16 px minimum : sinon iOS zoome la page au toucher et la mise en page reste « agrandie » */
+  input,textarea,select,.gq textarea,.lock input{font-size:16px}
+
+  /* 5. Cartes qui se retournent : préfixes WebKit + correctif du « faux dos » visible dans Safari */
+  .f,.b{-webkit-backface-visibility:hidden;top:0;left:0;right:0;bottom:0;-webkit-transform:translateZ(1px);transform:translateZ(1px)}
+  .b{-webkit-transform:rotateY(180deg) translateZ(1px);transform:rotateY(180deg) translateZ(1px);-webkit-overflow-scrolling:touch}
+  .in{-webkit-transform-style:preserve-3d}
+  .fc{-webkit-perspective:700px;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+  .fc.flip .in{-webkit-transform:rotateY(180deg)}
+
+  /* 6. Coins arrondis + overflow:hidden + animation : Safari « déborde » sans cette mise en couche */
+  .hero,.sky,#c3,.bp,.rt,.f.pic,.lv.pic{-webkit-transform:translateZ(0)}
+  .fc .f.pic{-webkit-transform:translateZ(1px)}
+  #c3 canvas{display:block;max-width:100%}
+
+  /* 7. Position « inset » absente des iOS < 14.5 */
+  .bp img.im,#tour{top:0;left:0;right:0;bottom:0}
+
+  /* 8. <summary> : retire le triangle natif de Safari qui s'ajoute au contenu flex */
+  summary{list-style:none}
+  summary::-webkit-details-marker{display:none}
+
+  /* 9. Ciel / zones tactiles : pas de menu de copie ni de surlignage au toucher long */
+  .sky,.lv,.node,.sp{-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+  .sky{-webkit-user-select:none;user-select:none}
+}

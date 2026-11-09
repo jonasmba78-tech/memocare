@@ -1,0 +1,6 @@
+/* THÈME : variables de couleur, mode sombre (auto + [data-theme]), base typographique */
+:root{--bg:#eef3ef;--fg:#14262b;--cd:#fff;--ac:#2447d6;--a2:#f2b705;--mu:#5d6f73;--ln:#d3dfd8;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#101a1e;--fg:#e9f1ee;--cd:#18272c;--ac:#8aa0ff;--mu:#9bb0b2;--ln:#2a3d43}}
+:root[data-theme=dark]{--bg:#101a1e;--fg:#e9f1ee;--cd:#18272c;--ac:#8aa0ff;--mu:#9bb0b2;--ln:#2a3d43}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 'Avenir Next','Trebuchet MS',system-ui,sans-serif}

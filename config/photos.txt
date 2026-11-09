@@ -1,0 +1,71 @@
+# ════════════════════════════════════════════════════════════════════
+#  MémoCare · PHOTOS et EMOJIS de l'application
+# ════════════════════════════════════════════════════════════════════
+#  Ce fichier décide ce qui s'affiche à la place de chaque emoji.
+#
+#  UNE LIGNE =  emoji de l'application  =  photo  OU  autre emoji
+#
+#     🩺 = medecin.jpeg     → l'emoji 🩺 est remplacé par la photo Images/medecin.jpeg
+#     🧩 = 🧠               → l'emoji 🧩 est remplacé par l'emoji 🧠
+#     🩺 =                  → (vide) ou ligne supprimée : on revoit l'emoji d'origine
+#
+#  • Une ligne qui commence par # est un commentaire (ignorée).
+#  • Les photos se déposent dans le dossier  Images/  (jpg, jpeg, png, webp).
+#  • L'emoji à gauche doit être IDENTIQUE à celui du code (copier-coller).
+#    Utilisez  python tools/chercher.py 🩺  pour voir où il est utilisé.
+#  • Un emoji = une photo PARTOUT où il apparaît (cartes, métiers, pyramide…).
+#  • Après toute modification :  python tools/build.py
+#    (reconstruit les images puis dist/memocare.html)
+#
+#  Réglages (optionnels) :
+@taille = 480      # côté le plus long des photos en pixels (plus grand = plus net, fichier plus lourd)
+@qualite = 76      # qualité JPEG de 1 à 95
+# ════════════════════════════════════════════════════════════════════
+
+🍼 = biberon.jpeg                   # Matériel « Feeding bottle » · Verbes « To feed » (biberon)
+🏊🏾 = bain-piscine.jpeg              # Matériel « Bathing / Bath » (bain, piscine)
+🔤 = tableau-communication.jpeg     # Matériel « Communication board » (tableau de communication)
+🎠 = tapis-eveil.jpeg               # Matériel « Play mat » (tapis d’éveil)
+🧷 = couches.jpeg                   # Matériel « Nappies / Diapers » (couches)
+🛌🏽 = lit-bebe.jpeg                  # Matériel « Cot / Crib » (lit bébé)
+🫁 = oxymetre.jpeg                  # Matériel « Oximeter »
+🩸 = tensiometre.jpeg               # Matériel « Blood pressure monitor »
+🌡️ = thermometre.jpeg               # Matériel « Thermometer »
+🦯 = canne.jpeg                     # Matériel « Walking stick / Cane »
+🦿 = deambulateur.jpeg              # Matériel « Walker / Zimmer frame »
+🧑🏾‍🦽 = fauteuil-roulant.jpeg          # Matériel « Wheelchair »
+👨‍👩‍👧‍👦 = famille-accueil.jpeg           # Équipe « Foster family »
+💆🏾 = kinesitherapeute.jpeg          # Équipe « Physiotherapist »
+📣 = superviseur.jpeg               # Équipe « Supervisor / Head of department »
+🧹 = agent-entretien.jpeg           # Équipe « Porter / Cleaner »
+🩺 = medecin.jpeg                   # Équipe « Doctor » (et tout endroit où apparaît 🩺)
+📇 = assistante-sociale.jpeg        # Équipe « Social worker »
+🫂 = psychologue.jpeg               # Équipe « Psychologist »
+👩🏾‍⚕️ = sage-femme.jpeg                # Équipe « Midwife »
+🧑🏾‍🦳 = auxiliaire-de-vie.jpeg         # Équipe + Métiers « Care assistant »
+👩🏾‍🍼 = auxiliaire-puericulture.jpeg   # Équipe + Métiers « Childcare assistant »
+👨🏾‍🏫 = educateur-specialise.jpeg      # Équipe + Métiers « Special educator »
+👨🏾‍⚕️ = infirmiere.jpeg                # Équipe + Métiers « Nurse »
+👫🏾 = adolescents.jpg                # Pyramide : niveau « Appartenance »
+🛹 = adolescents.jpg                # Étapes de l’enfance : « Adolescent » (même photo)
+🥇 = educateur-specialise.jpeg      # Pyramide : niveau « Estime » (même photo que l’éducateur)
+👶🏽 = nouveau-ne.jpeg                # Frise 0-3 ans : 0 à 2 mois + étapes de l’enfance « Nouveau-né »
+🥰 = nourrisson.jpeg                # Frise 0-3 ans : 2 à 4 mois + étapes de l’enfance « Nourrisson »
+🧒🏽 = jeune-enfant.jpeg              # Étapes de l’enfance : « Jeune enfant » (2 à 6 ans)
+👣 = jeune-enfant.jpeg              # Frise 0-3 ans : 12 à 18 mois (premiers pas) — même photo que « Jeune enfant »
+🎒 = enfants-age-scolaire.jpeg      # Étapes de l’enfance : « Enfant d’âge scolaire » (6 à 12 ans)
+🛝 = enfants-age-scolaire.jpeg      # Vocabulaire « To play » (jouer)
+♿ = enfant-handicape.jpeg          # Besoins spécifiques : « Handicap »
+🧳 = enfants-refugies.jpeg          # Besoins spécifiques : « Déplacé ou réfugié »
+🐾 = tapis-eveil.jpeg               # Frise 0-3 ans : 8 à 10 mois (à quatre pattes) — même photo que le tapis d’éveil
+
+# ─── Cours 3 « Sémiologie » ──────────────────────────────────────────
+#  Il réutilise les photos ci-dessus (matériel, équipe, métiers, enfants).
+#  Rappel : une même photo peut être associée à plusieurs emojis (une ligne par emoji).
+
+# ─── Toutes les photos du dossier Images/ sont utilisées ─────────────
+#  (31 photos). Pour en ajouter une : déposez-la dans Images/ puis ajoutez une ligne  « emoji = fichier ».
+
+# ─── Exemples de remplacement d'emoji par un autre emoji ─────────────
+# 🧩 = 🧠
+# 🪑 = 💺

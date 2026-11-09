@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><title>MémoCare · English for Care</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Three.js (Corps 3D) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- @CSS -->
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/ios.css">
+<!-- /@CSS -->
+</head><body>
+<main>
+<header class="hero"><span class="fl" style="left:60%;top:8px">🩺</span><span class="fl" style="left:82%;top:40px;animation-delay:-3s">🍼</span><span class="fl" style="left:68%;top:96px;animation-delay:-6s">🧸</span><span class="fl" style="left:90%;top:110px;animation-delay:-2s">♿</span>
+<h1>MémoCare</h1><p>Cours pour auxiliaires de vie, de puériculture et éducateurs spécialisés</p>
+<div class="lic" id="lic"></div><div class="row"><span>Ta progression</span><span id="pt">0 %</span></div><div class="pbar"><i id="pb"></i></div><button class="go" id="go">Continuer</button></header>
+<div id="app"></div><div id="ts"></div>
+<p class="ft"><span id="pied"></span><br><button class="ed" id="ed">🖼️ Mode éditeur d’images</button><button class="ed" id="ex">⬇ Exporter les images</button><button class="ed" id="rz">↺ Réinitialiser mes images</button></p>
+</main>
+<!-- @JS : ordre de chargement = ordre des numéros dans README -->
+<script src="js/core/helpers.js"></script>
+<script src="js/data/textes.js"></script>
+<script src="js/data/en-modules-dialogues.js"></script>
+<script src="js/data/en-cards.js"></script>
+<script src="js/core/state-views.js"></script>
+<script src="js/core/render-nav.js"></script>
+<script src="js/views/body3d.js"></script>
+<script src="js/data/psy-modules.js"></script>
+<script src="js/core/storage-progress.js"></script>
+<script src="js/views/routines-grammar.js"></script>
+<script src="config/licence.js"></script>
+<script src="js/core/licence-core.js"></script>
+<script src="js/core/licence.js"></script>
+<script src="js/views/pyramid-frise.js"></script>
+<script src="js/data/images-default.js"></script>
+<script src="js/core/images-editor.js"></script>
+<script src="js/views/pyramid-detail.js"></script>
+<script src="js/views/plan.js"></script>
+<script src="js/data/quizzes.js"></script>
+<script src="js/views/quiz.js"></script>
+<script src="js/views/metiers-bilan.js"></script>
+<script src="js/data/psy-dialogues-v2.js"></script>
+<script src="js/core/events-quiz-editor.js"></script>
+<script src="js/data/psy-explanations.js"></script>
+<script src="js/data/psy-precautions-games.js"></script>
+<script src="js/views/understanding-games.js"></script>
+<script src="js/data/sem-intro.js"></script>
+<script src="js/data/sem-metiers-1.js"></script>
+<script src="js/data/sem-metiers-2.js"></script>
+<script src="js/views/sem-core.js"></script>
+<script src="js/data/banners.js"></script>
+<script src="js/views/tour.js"></script>
+<script src="js/main.js"></script>
+<!-- /@JS -->
+</body></html>
