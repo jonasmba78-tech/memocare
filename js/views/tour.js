@@ -2,9 +2,10 @@
    S’ouvre toute seule à la première utilisation ; bouton « ❓ Visite guidée » pour la relancer. Textes : tableau TOUR ci-dessous. === */
 (function(){
 const TOUR=[
-{s:'.hero h1',t:'Bienvenue dans MémoCare 👋',d:'Cette visite de 8 étapes te montre comment suivre ton parcours. Tu peux la quitter à tout moment avec « Passer ».'},
+{s:'.hero h1',t:'Bienvenue dans MémoCare 👋',d:'Cette visite de 9 étapes te montre comment suivre ton parcours. Tu peux la quitter à tout moment avec « Passer ».'},
 {s:'#pb',t:'Ta progression',d:()=>'Cette barre se remplit à chaque étape validée. Pour l’instant : <b>'+($('#pt').textContent||'0 %')+'</b>.'},
 {s:'#go',t:'Le bouton « Continuer »',d:'Il t’emmène directement à la prochaine étape à faire. Si tu ne sais pas par où reprendre, touche-le.'},
+{s:'#motjour',t:'Le glossaire : les mots difficiles expliqués simplement',d:'Un mot compliqué comme <b>dyspnée</b>, <b>escarre</b> ou <b>hématome</b> ? Dans tous les cours, les mots <mark>soulignés en jaune</mark> sont cliquables : touche-les pour une explication en mots simples, un exemple et la conduite à tenir. Le bouton 📚 en bas ouvre tout le glossaire, avec un défi pour t’entraîner.'},
 {s:'.tabs.c',t:'Les trois cours',d:'<b>English for Care</b>, <b>Psychologie de l’enfant</b> et <b>Sémiologie</b>. Touche un cours pour changer.'},
 {s:'.tabs:not(.c):not(.s)',t:'Les modules et chapitres',d:'Chaque cours est découpé en modules ou chapitres. Le 🔒 indique un module payant : les deux premiers de chaque cours sont gratuits.'},
 {s:'.story',t:'Le résumé du chapitre',d:'Avant de commencer, lis ce court texte : il donne l’idée à retenir. Les photos au-dessus montrent le sujet.'},
