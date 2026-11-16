@@ -69,3 +69,9 @@
 # ─── Exemples de remplacement d'emoji par un autre emoji ─────────────
 # 🧩 = 🧠
 # 🪑 = 💺
+
+# ── Photos de la vie quotidienne (ajoutées) ──
+🦻 = avq/appareil-auditif.jpeg      # Matériel « Hearing aid » (appareil auditif)
+🪥 = avq/brossage-dents.jpeg        # « To brush teeth » (se brosser les dents)
+📺 = avq/television.jpeg            # « To watch TV » (regarder la télévision)
+🎧 = avq/radio.jpeg                 # « To listen to the radio / music »

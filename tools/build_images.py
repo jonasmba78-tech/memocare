@@ -27,6 +27,31 @@ def lire_config():
         else: emojis[cle] = val
     return photos, emojis, reglages
 
+
+def _jpeg(Image, chemin, cote, qualite):
+    im = Image.open(chemin).convert('RGB')
+    s = min(1, cote / max(im.size))
+    im = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))), Image.LANCZOS)
+    b = io.BytesIO(); im.save(b, 'JPEG', quality=qualite, optimize=True)
+    return 'data:image/jpeg;base64,' + base64.b64encode(b.getvalue()).decode()
+
+def support():
+    """Images/avq/*  (photos du vocabulaire de la vie quotidienne)  et  Images/fiches/*  (pages photographiées du support de cours)
+    -> js/data/fiches-default.js : SUPPORT = { avq:{nom:image}, fiches:{nom:image} }   (nom = nom du fichier sans extension)"""
+    from PIL import Image
+    out = {}
+    for dossier, cote, q in (('avq', 480, 76), ('fiches', 1000, 62)):
+        d = root / 'Images' / dossier
+        out[dossier] = {}
+        if d.exists():
+            for f in sorted(d.iterdir()):
+                if f.suffix.lower() in EXT:
+                    out[dossier][f.stem] = _jpeg(Image, f, cote, q)
+    js = ('/* === GÉNÉRÉ par tools/build_images.py à partir de Images/avq et Images/fiches — NE PAS MODIFIER ICI === */\n'
+          'const SUPPORT=' + json.dumps(out, ensure_ascii=False) + ';\n')
+    (root / 'js' / 'data' / 'fiches-default.js').write_text(js, encoding='utf-8')
+    print(f"✓ support de cours : {len(out['avq'])} photo(s) vocabulaire, {len(out['fiches'])} page(s) de fiche")
+
 def main():
     try:
         from PIL import Image
@@ -58,6 +83,7 @@ def main():
           "const IMGS=Object.assign({},DEFIMG);try{Object.assign(IMGS,JSON.parse(localStorage.getItem('mcimg')||'{}'))}catch(e){}\n")
     (root / 'js' / 'data' / 'images-default.js').write_text(js, encoding='utf-8')
     print(f'✓ {len(uniques)} photo(s) pour {len(sortie)} emoji(s), {len(emojis)} emoji(s) de remplacement' + (f' — {erreurs} erreur(s)' if erreurs else ''))
+    support()
     if erreurs: sys.exit(1)
 
 if __name__ == '__main__':
