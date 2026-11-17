@@ -110,3 +110,22 @@ mark{background:#f2b705;color:#14262b;padding:0 6px;border-radius:6px;animation:
 .gq textarea{display:block;width:100%;box-sizing:border-box;margin-top:8px;padding:9px 10px;border:1.5px solid var(--ln);border-radius:10px;background:var(--bg);color:var(--fg);font:inherit;font-size:15px;resize:vertical}
 .gq small{display:block;margin-top:2px}
 .rapport{white-space:pre-wrap;font:15px/1.5 inherit;font-family:inherit;margin:6px 0 10px}
+
+/* === Badges NOUVEAU + carte Nouveautés + test des voix === */
+.nw{display:inline-block;font:800 8.5px/1 system-ui,sans-serif;font-style:normal;letter-spacing:.5px;text-transform:uppercase;background:linear-gradient(135deg,#ff3d6e,#ff9f1c);color:#fff;border-radius:99px;padding:3px 6px 2px;margin-left:6px;vertical-align:middle;white-space:nowrap;box-shadow:0 2px 6px -2px rgba(255,61,110,.7);animation:nwp 1.9s ease-in-out infinite}
+.tabs button.on .nw{background:#fff;color:#d6204f;box-shadow:none}
+@keyframes nwp{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+@media (prefers-reduced-motion:reduce){.nw{animation:none}}
+#nouv{margin:0 0 10px}
+.nvd{background:var(--cd);border:1px solid var(--ln);border-radius:16px;padding:0;overflow:hidden;box-shadow:var(--sh)}
+.nvd summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:12px 14px;font-size:15px}
+.nvd summary::-webkit-details-marker{display:none}
+.nvd summary::after{content:"▾";margin-left:auto;color:var(--mu)}.nvd[open] summary::after{content:"▴"}
+.nvn{background:var(--ac);color:#fff;border-radius:99px;font:700 12px system-ui;padding:2px 8px}
+.nvd .nw{margin-left:0}
+.nvi{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--ln);padding:11px 14px;color:inherit;font:inherit;cursor:pointer}
+.nvi i{font-style:normal;font-size:26px;flex:none}.nvi span{flex:1}.nvi b{display:block;font-size:14.5px}.nvi small{color:var(--mu);font-size:12px}.nvi em{font-style:normal;color:var(--mu);font-size:20px}
+.vxb{margin-top:10px;padding:9px 14px;border-radius:10px;border:1px solid var(--ln);background:var(--cd);color:var(--fg);font:600 13px inherit;font-family:inherit}
+#voxp{position:fixed;inset:0;z-index:60;background:rgba(8,16,22,.7);display:flex;align-items:center;justify-content:center;padding:16px}
+#voxp .vc{background:var(--bg);color:var(--fg);border-radius:18px;padding:18px;max-width:420px;width:100%;max-height:88vh;overflow:auto;box-shadow:0 20px 50px -10px rgba(0,0,0,.6)}
+#voxp .vc h3{margin:0 0 8px}#voxp .vc p{margin:8px 0}#voxp .vc .go{margin:4px 0 10px;width:100%}

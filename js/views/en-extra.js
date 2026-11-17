@@ -43,8 +43,8 @@ V.fiche=()=>{const F=FICHE[mod]||[];
 let h='<p class="mu">Résumé du cours. Touche une ligne ou le 🔊 pour écouter l’anglais.</p>';
 F.forEach(([t,k,c])=>{h+=`<h4 class="fh">${t}</h4>`;
 if(k=='ul')h+='<div class="rl"><ul>'+c.map(x=>`<li style="margin:6px 0">${x}</li>`).join('')+'</ul></div>';
-else if(k=='tb')h+=`<table class="ft2"><tr>${c.h.map(x=>`<th>${x}</th>`).join('')}</tr>${c.r.map(r=>`<tr ${c.sp!=null?`class="sp" data-t="${esc(r[c.sp])}"`:''}>${r.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')}</table>`;
-else if(k=='sp')h+=c.map(([en,fr])=>`<div class="fq"><span><b>${en}</b><small>${fr}</small></span><button class="sp" data-t="${esc(en)}" aria-label="Écouter">🔊</button></div>`).join('')});
+else if(k=='tb')h+=`<table class="ft2"><tr>${c.h.map(x=>`<th>${x}</th>`).join('')}</tr>${c.r.map(r=>`<tr ${c.sp!=null?`class="sp" data-l="en" data-t="${esc(r[c.sp])}"`:''}>${r.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')}</table>`;
+else if(k=='sp')h+=c.map(([en,fr])=>`<div class="fq"><span><b>${en}</b><small>${fr}</small></span><button class="sp" data-l="en" data-t="${esc(en)}" aria-label="Écouter">🔊</button></div>`).join('')});
 const pg=(FPAGES[mod]||[]).filter(n=>SU.fiches[n]);
 if(pg.length)h+=`<details class="pg"><summary>📷 Voir les pages du support (${pg.length})</summary>${pg.map(n=>`<img loading="lazy" alt="Page ${n.slice(1)} du support" src="${SU.fiches[n]}">`).join('')}</details>`;
 $('#v').innerHTML=h;mk(mod+':fiche')};
@@ -87,7 +87,7 @@ else if(x=t.closest('[data-xo]')){const S=getS(mod);if(S.c[S.b])return;const[j,k
 else if(t.closest('[data-xc]')){const S=getS(mod);S.c[S.b]=1;exo();scrollTo({top:0})}
 else if(t.closest('[data-xr]')){const S=getS(mod);delete S.c[S.b];delete S.a[S.b];delete S.p[S.b];exo();scrollTo({top:0})}
 else if(x=t.closest('[data-xs]')){const S=getS(mod);S.r[S.b+':'+x.dataset.xs]=1;exo()}
-else if(x=t.closest('[data-pc]')){x.classList.toggle('o');x.dataset.v=1;const it=AVQP[+x.dataset.pc];if(x.classList.contains('o'))sp(it[1]+'. '+it[3]);if(sec=='img'&&[...document.querySelectorAll('#v .pc')].every(c=>c.dataset.v))mk(mod+':img')}
+else if(x=t.closest('[data-pc]')){x.classList.toggle('o');x.dataset.v=1;const it=AVQP[+x.dataset.pc];if(x.classList.contains('o'))sp(it[1]+'. '+it[3],'en');if(sec=='img'&&[...document.querySelectorAll('#v .pc')].every(c=>c.dataset.v))mk(mod+':img')}
 else if(x=t.closest('[data-pqa]')){if(PQ.fb)return;const g=x.dataset.ok==='1';if(g)PQ.s++;document.querySelectorAll('[data-pqa]').forEach(b=>{b.disabled=true;if(b.dataset.ok==='1')b.classList.add('ok');else if(b===x)b.classList.add('ko')});PQ.fb=`<div class="xr ${g?'g':'b'}">${g?'✅ Bien joué !':'❌ Pas tout à fait.'}</div><button class="go" data-pqn>${PQ.i+1>=PQ.o.length?'Voir le score':'Suivant ▸'}</button>`;$('#pqf').innerHTML=PQ.fb}
 else if(t.closest('[data-pqn]')){PQ.i++;PQ.fb='';pqShow()}
 else if(t.closest('[data-pqr]')){PQ={i:0,s:0,o:shuf(AVQP.map((_,i)=>i)).slice(0,8),fb:''};pqShow()}});

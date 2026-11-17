@@ -17,12 +17,14 @@
 <div class="chips"><span id="lvl">🌱 Découverte</span><button data-dk="glo" id="chgl">📚 <b id="gcnt"></b> Glossaire</button></div>
 <div class="lic" id="lic"></div><div class="row"><span>Ta progression</span><span id="pt">0 %</span></div><div class="pbar"><i id="pb"></i></div><button class="go" id="go">Continuer</button></header>
 <section id="motjour"></section>
+<section id="nouv"></section>
 <div id="app"></div><div id="ts"></div>
 <nav id="dock" aria-label="Navigation rapide"><button data-dk="home"><i>🏠</i><span>Accueil</span></button><button id="dockgl"><i>📚</i><span>Glossaire</span><em id="gbadge"></em></button><button data-dk="go" class="main"><i>▶</i><span>Continuer</span></button><button data-thm><i>🌙</i><span>Thème</span></button></nav>
-<p class="ft"><span id="pied"></span><br><button class="ed" id="ed">🖼️ Mode éditeur d’images</button><button class="ed" id="ex">⬇ Exporter les images</button><button class="ed" id="rz">↺ Réinitialiser mes images</button></p>
+<p class="ft"><span id="pied"></span><br><button class="vxb" id="voxbtn">🔊 Tester les voix de mon téléphone</button><br><button class="ed" id="ed">🖼️ Mode éditeur d’images</button><button class="ed" id="ex">⬇ Exporter les images</button><button class="ed" id="rz">↺ Réinitialiser mes images</button></p>
 </main>
 <!-- @JS : ordre de chargement = ordre des numéros dans README -->
 <script src="js/core/helpers.js"></script>
+<script src="js/core/voice.js"></script>
 <script src="js/data/textes.js"></script>
 <script src="js/data/en-modules-dialogues.js"></script>
 <script src="js/data/en-cards.js"></script>
@@ -62,6 +64,8 @@
 <script src="js/views/glossaire.js"></script>
 <script src="js/views/tour.js"></script>
 <script src="js/views/wow.js"></script>
+<script src="js/data/nouveautes.js"></script>
+<script src="js/views/nouveau.js"></script>
 <script src="js/main.js"></script>
 <!-- /@JS -->
 </body></html>

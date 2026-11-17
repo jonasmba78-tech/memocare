@@ -65,6 +65,6 @@ foc.forEach(t=>t.onclick=()=>{cf=t.dataset.bf;ty=BODYFOC[cf][0];tz=BODYFOC[cf][1
 e.onpointerdown=ev=>{dn=ev.clientX;mv=0};
 e.onpointermove=ev=>{if(dn!==null){const dx=ev.clientX-dn;mv+=Math.abs(dx);g.rotation.y+=dx*.012;dn=ev.clientX}};
 e.onpointerleave=()=>{dn=null};
-e.onpointerup=ev=>{dn=null;if(mv<6){const q=e.getBoundingClientRect();v.set((ev.clientX-q.left)/q.width*2-1,-(ev.clientY-q.top)/q.height*2+1);rc.setFromCamera(v,c);const h=rc.intersectObjects(ms.filter(m=>m.visible&&(BODYMODE=='int'?m.userData.i:!m.userData.i)))[0];if(h){const n=h.object.userData.n;TP.add(n);if(TP.size>=10)mk('2:corps');glow(n);$('#lb').innerHTML=`<b>${n}</b> · ${FR[n]||''}<br><small>${BX[n]||''}</small>`;sp(BX[n]?n+'. '+BX[n]:n)}}};
+e.onpointerup=ev=>{dn=null;if(mv<6){const q=e.getBoundingClientRect();v.set((ev.clientX-q.left)/q.width*2-1,-(ev.clientY-q.top)/q.height*2+1);rc.setFromCamera(v,c);const h=rc.intersectObjects(ms.filter(m=>m.visible&&(BODYMODE=='int'?m.userData.i:!m.userData.i)))[0];if(h){const n=h.object.userData.n;TP.add(n);if(TP.size>=10)mk('2:corps');glow(n);$('#lb').innerHTML=`<b>${n}</b> · ${FR[n]||''}<br><small>${BX[n]||''}</small>`;sp(BX[n]?n+'. '+BX[n]:n,'en')}}};
 (function L(){if(!b.isConnected)return;if(dn===null&&cf=='all')g.rotation.y+=.005;fy+=(ty-fy)*.12;fz+=(tz-fz)*.12;c.position.set(0,fy,fz);c.lookAt(0,fy,0);r.render(s,c);requestAnimationFrame(L)})()}
 catch(x){b.textContent='3D indisponible ici.'}}

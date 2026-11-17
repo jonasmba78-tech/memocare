@@ -6,8 +6,10 @@ $('#app').innerHTML=`<div class="tabs c">${Object.keys(CRS).map(k=>`<button data
 document.addEventListener('click',e=>{const t=e.target;let x;
 if(x=t.closest('[data-m]')){mod=+x.dataset.m;R()}
 else if(x=t.closest('[data-s]')){sec=x.dataset.s;R()}
-else if(x=t.closest('.sp')){sp(x.dataset.t)}
-else if(x=t.closest('.fc')){x.classList.toggle('flip');sp(x.dataset.t)}
+else if(x=t.closest('.sp')){sp(x.dataset.t,x.dataset.l)}
+else if(x=t.closest('.fc')){x.classList.toggle('flip');const D=x.dataset,en=VOX.defLang()=='en';
+if(!x.classList.contains('flip'))sp(D.t,en?'en':undefined);
+else{const pp=[];if(D.cf)pp.push({t:D.cf,l:en?'fr':undefined});if(D.cd)pp.push({t:D.cd,l:en?(D.cx=='1'?'en':'fr'):undefined});VOX.say(pp)}}
 else if(x=t.closest('.nx')){const c=x.closest('.cm'),d=CB[mod][+c.dataset.i],st=c.querySelector('.strip');let k=+c.dataset.k||0;if(k>=d.p.length){st.innerHTML='';k=0}
 const[w,en,fr,fx]=d.p[k],p=document.createElement('div');p.className='pn';
 p.innerHTML=`<div class="sc"><span class="ch ${w==0?'on':''}">${d.c[0][0]}<small>${d.c[0][1]}</small></span><span class="fx">${fx}</span><span class="ch ${w==1?'on':''}">${d.c[1][0]}<small>${d.c[1][1]}</small></span></div><div class="bb ${w?'r':'l'}">${en}<button class="sp" data-t="${en}">🔊</button><small>${fr}</small></div>`;

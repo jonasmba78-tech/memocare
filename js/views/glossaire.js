@@ -8,7 +8,7 @@ let OK=new Set();try{OK=new Set(JSON.parse(localStorage.getItem('mcgl')||'[]'))}
 const save=()=>{try{localStorage.setItem('mcgl',JSON.stringify([...OK]))}catch(e){}badge()};
 function badge(){const b=$('#gbadge');if(b)b.textContent=OK.size+'/'+GL.length;const h=$('#gcnt');if(h)h.textContent=OK.size+'/'+GL.length;const c=$('#gcount');if(c)c.textContent=OK.size+' / '+GL.length+' mots compris'}
 const buzz=n=>{try{navigator.vibrate&&navigator.vibrate(n)}catch(e){}};
-function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='fr-FR';u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
+function say(t){try{VOX.say([{t,d:'fr'}])}catch(e){}}
 
 /* ---------- repérage automatique des mots dans les écrans ---------- */
 const alts=GL.map(g=>g.re).sort((a,b)=>b.length-a.length).join('|');
