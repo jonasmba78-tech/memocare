@@ -17,5 +17,6 @@ const NOUV=[
 ['2026-11-15',21,'','Nouveau module : Familles & collègues','👪',''],
 ['2026-11-15',22,'','Nouveau module : Nourriture & régimes','🍚',''],
 ['2026-11-17',0,'','Voix corrigées : l’anglais en anglais, le français en français (test des voix en bas de page)','🔊','voix'],
-['2026-11-17',0,'','Badges « Nouveau » pendant 2 semaines','🆕','']
+['2026-11-17',0,'','Badges « Nouveau » pendant 2 semaines','🆕',''],
+['2026-11-17',23,'','Nouveau cours : Équipements, logement et entretien (8 chapitres)','🏠','']
 /* @FIN */];

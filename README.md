@@ -1,12 +1,13 @@
 # MémoCare — guide complet
 
-MémoCare est une application d’apprentissage mobile (sans serveur) pour les **auxiliaires de vie, auxiliaires de puériculture, éducateurs spécialisés et métiers du domicile**. Elle propose trois cours :
+MémoCare est une application d’apprentissage mobile (sans serveur) pour les **auxiliaires de vie, auxiliaires de puériculture, éducateurs spécialisés et métiers du domicile**. Elle propose quatre cours :
 
 | Cours | Modules | Contenu |
 |---|---|---|
 | **English for Care** | 1 · Saluer, 2 · Corps & soins, 3 · Routines | anglais professionnel : BD/dialogues, vocabulaire, équipe, métiers, matériel, corps 3D, routines, grammaire, quiz |
 | **Psychologie de l'enfant** | 4 · Découvrir l'enfant, 5 · Le développement, 6 · De 0 à 3 ans, 7 · De 3 à 12 ans, 8 · L'adolescent, 9 · Émotions & attachement, 10 · Famille & culture, 11 · Observer & alerter | pyramide de Maslow, frise 0-3 ans, fiches « Comprendre », cas réels, précautions, mini-jeux, quiz, bilans |
 | **Sémiologie** (Dr J. Etoung) | Intro · I AVS · II Auxiliaire de puériculture · III Cuisinier à domicile · IV Agent de ménage et linge · V Éducateur spécialisé · VI Employé familial · VII Méthodologie d'observation | chaque grand titre du support = un chapitre ; fiches de signes, « Comprendre », BD, cas pratiques, conduite à tenir, quiz, mini-jeux, bilan ; chapitre VII : grille Qui/Quoi/Quand/Où/Comment/Pourquoi avec rapport |
+| **Logement & entretien** (Sciences des équipements, du logement et aménagement du milieu de vie) | I Généralités et concepts · II Équipements d'entretien · III Nettoyage et produits · IV Surfaces et objets · V La vaisselle · VI Entretien du linge · VII Organisation de la maison · VIII Appareils électroménagers | modules 23 à 30 : fiches, « Comprendre », BD, cas pratiques, précautions, quiz, mini-jeux, bilan |
 
 L'application est **100 % côté navigateur** : HTML + CSS + JavaScript, aucun serveur. La progression est enregistrée dans le navigateur (`localStorage`).
 
@@ -41,7 +42,6 @@ MémoCare/
 ├─ index.html               ← squelette de la page + ordre de chargement des scripts
 ├─ css/theme.css            ← couleurs, mode sombre, polices
 ├─ css/app.css              ← mise en forme de tous les composants
-├─ css/ios.css              ← correctifs iPhone/iPad uniquement (bloc @supports iOS, sans effet ailleurs)
 ├─ js/data/                 ← LES CONTENUS (textes des cours) — à éditer
 │   ├─ textes.js            ← textes de l'interface (titre, sous-titre, pied de page, écran payant)
 │   ├─ en-modules-dialogues.js   modules 1-3 : MO (titres, résumés) + CB (BD / dialogues)
@@ -347,3 +347,63 @@ Les 31 photos de `Images/` sont toutes utilisées (voir `config/photos.txt`). Le
 ## 12. Visite guidée
 
 `js/views/tour.js` : 8 étapes (progression, « Continuer », cours, modules, résumé, sections, contenu). Elle s'ouvre à la première utilisation (mémorisée dans `localStorage`, clé `mctour`) et se relance avec le bouton « ❓ Visite guidée » de l'en-tête. Les textes sont dans le tableau `TOUR` en haut du fichier.
+
+
+## 13. Glossaire et design « wow » (nouveau)
+
+- **Glossaire** : `js/data/glossaire.js` (110 mots : dyspnée, escarre, hématome, syllogomanie…). Chaque mot est souligné automatiquement dans tous les cours ; on le touche pour une fiche « en deux mots · expliqué simplement · exemple · ce que je fais ». Pour ajouter un mot, copiez une ligne `T(...)` (le format est expliqué en haut du fichier). Moteur : `js/views/glossaire.js`.
+- **Design** : `css/wow.css` (couleurs en haut du fichier), animations et thème sombre : `js/views/wow.js`.
+- Après modification : `python tools/build.py`.
+
+---
+
+## Ajout : corps 3D complet, cours/exercices autonomes, modules issus des fiches (cours 1)
+
+| Fichier | Rôle |
+|---|---|
+| `js/data/en-body.js` | toutes les parties du corps (cartes + phrases + français). **Ajouter une partie** = une ligne ici (+ une ligne `add(…)` dans `body3d.js` si on la veut en 3D) |
+| `js/views/body3d.js` | corps 3D : mode Extérieur / Intérieur, zooms (tête, tronc, mains, jambes, pieds) |
+| `js/data/en-course2.js` | module 2 : fiche « Cours » (`FICHE`), exercices corrigés (`EXO`), mini-jeux, quiz en plus |
+| `js/data/en-modules-new.js` | modules 20 « AVQ (suite) » (fiches p. 21-24), 21 « Familles & collègues » (p. 25-29), 22 « Nourriture & régimes » (p. 30-31) |
+| `js/views/en-extra.js` | moteur des onglets Cours, Exercices (écrire / choisir / s’exprimer), Photos. Les formats de données sont décrits en tête du fichier |
+| `Images/avq/` | photos du vocabulaire (nom du fichier = clé utilisée dans `AVQP`, dans `en-extra.js`) |
+| `Images/fiches/` | pages photographiées du support (p21.jpg, p23.jpg …), affichées sous l’onglet « Cours » via `FPAGES[n]` |
+
+**Ajouter une nouvelle fiche de cours** : (1) déposer la photo dans `Images/fiches/` ; (2) ajouter son nom dans `FPAGES[n]` ; (3) transcrire son contenu dans `FICHE[n]` ; (4) ajouter les exercices dans `EXO[n]` ; puis `python tools/build.py`.
+**Ajouter une photo de vocabulaire** : déposer le fichier dans `Images/avq/` et ajouter une ligne dans `AVQP` (`en-extra.js`).
+Les modules 20, 21, 22 sont réservés aux licences comme le module 3 (`PAID.add(…)` dans `en-modules-new.js`, à retirer pour les rendre gratuits).
+
+---
+
+## Badges « NOUVEAU » (visibles 14 jours)
+
+Chaque nouveauté est une ligne de `js/data/nouveautes.js` : date, module, section, titre, icône. Le badge s’affiche sur l’onglet du cours, du module et de la section concernés, ainsi que dans la carte « 🆕 Nouveautés » sous la bannière. Il disparaît tout seul au bout de 14 jours (le jour de l’ajout + 13 jours).
+
+**À chaque ajout** (nouveau cours, module, onglet ou fonction) :
+```
+python tools/nouveau.py 2 corps "Titre de la nouveauté" "🫀"      # module 2, onglet « corps »
+python tools/nouveau.py 23 "" "Nouveau module : Santé" "🏥"       # tout un module
+python tools/nouveau.py 0 "" "Nouvelle fonction" "✨"              # fonction hors module
+python tools/build.py
+```
+La date du jour est ajoutée automatiquement. (On peut aussi copier une ligne à la main.)
+
+## Lecture à voix haute (anglais en anglais, français en français)
+
+Tout passe par `js/core/voice.js`. La langue de chaque texte est détectée (accents, mots courants, élisions) ; sinon la langue du cours est utilisée ; on peut aussi l’imposer : `sp('Dos','fr')`. Les cartes lisent le recto en anglais puis, une fois retournées, le verso en français (et l’exemple dans sa langue). Pour fonctionner sur toutes les marques de téléphone, le moteur choisit lui-même une voix installée (formats `en-US`, `en_US`, `eng-USA`, `fra-FRA`…), préfère les voix hors-ligne, patiente avant de lire (Android) et découpe les longs textes. Si une voix manque, un message le signale et le bouton **« 🔊 Tester les voix de mon téléphone »** (bas de page) montre les voix trouvées, les fait écouter et explique comment installer celles qui manquent (Android, Samsung, iPhone).
+
+
+---
+
+## 14. Cours 4 « Logement & entretien » (modules 23 à 30)
+
+| Fichier | Rôle |
+|---|---|
+| `js/data/log-1.js` | `LOGD[23]` I Généralités · `LOGD[24]` II Équipements · `LOGD[25]` III Nettoyage et produits |
+| `js/data/log-2.js` | `LOGD[26]` IV Surfaces · `LOGD[27]` V Vaisselle · `LOGD[28]` VI Linge · `LOGD[29]` VII Maison · `LOGD[30]` VIII Appareils |
+| `js/views/log-core.js` | transforme `LOGD[n]` en modules (même principe que `sem-core.js`) ; modules 23 et 24 gratuits, 25 à 30 payants (`PAID`) |
+
+Format d'un chapitre `LOGD[n]` (identique au cours 3, sans « Grille ») : `t` titre, `story` introduction, `ph` bannière, `obj` objectifs, `g` groupes de notions (chaque ligne `'emoji|nom|détail du cours'` alimente Fiches **et** Comprendre ; `lb` change les intitulés des rubriques), `pre`/`prh` précautions, `cb` BD, `cas` cas pratiques, `qz` quiz, `vf`/`mt`/`or`/`cl` mini-jeux, `es` bilan.
+Les BD et les cas illustratifs sont des compléments pédagogiques ; les exercices pratiques de la page « Évaluation » du support sont corrigés dans les cas pratiques des chapitres IV, VI, VII et VIII.
+
+**Photos à venir** : chaque notion a un emoji propre, volontairement différent des emojis déjà associés à une photo. Pour mettre une photo : une ligne dans `config/photos.txt` (ex. `🧽 = eponge.jpeg`) puis `python tools/build.py`. Attention : le même emoji sert parfois à deux endroits (voir §3).
